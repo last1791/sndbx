@@ -21,7 +21,7 @@ def upload_json_to_ftp():
     # Připoj se na FTP
     with ftplib.FTP_TLS(FTP_HOST) as ftp:
         ftp.login(FTP_USER, FTP_PASS)
-        ftp.cwd(FTP_DIR)
+        #ftp.cwd(FTP_DIR)
         
         # Nahraj soubor
         with open(local_file, 'rb') as f:
