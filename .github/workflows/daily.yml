@@ -1,0 +1,38 @@
+name: Daily LLM Collector
+
+on:
+  schedule:
+    - cron: "0 6 * * *"    # každý den 06:00 UTC
+  workflow_dispatch:         # manuální spuštění z GitHub UI
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout sndbx
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run collector
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python llm_collect.py
+
+      - name: Commit & push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/llm_data.jsonl
+          git diff --cached --quiet \
+            || git commit -m "data: LLM snapshot $(date -u +%Y-%m-%d)"
+          git push
