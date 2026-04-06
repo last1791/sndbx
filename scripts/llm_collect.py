@@ -12,7 +12,7 @@ import requests
 from pathlib import Path
 
 # scripts/ je o úroveň níž než kořen repozitáře → parents[1]
-OUTPUT = Path(__file__).resolve().parents[1] / "data" / "llm_data.jsonl"
+OUTPUT = Path(__file__).resolve().parents[1] / "sndbx" / "llm_data.jsonl"
 
 MODELS = [
     {"hf_id": "deepseek-ai/DeepSeek-V3",               "name": "DeepSeek V3",        "developer": "DeepSeek",   "parameters_b": 671, "architecture": "MoE (Mixture of Experts)", "license": "open-source"},
