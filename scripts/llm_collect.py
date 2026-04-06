@@ -1,7 +1,7 @@
 """
 LLM Daily Collector
 Umístění: sndbx/scripts/llm_collect.py
-Výstup:   sndbx/data/llm_data.jsonl
+Výstup:   sndbx/sndbx/llm_data.jsonl
 """
 
 import json
